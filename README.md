@@ -2,7 +2,7 @@ PAV - P3: estimación de pitch
 =============================
 
 
-Albert Caus i Nacho Blasi
+Alumnes: Albert Caus i Nacho Blasi
 -------------------------
 
 
