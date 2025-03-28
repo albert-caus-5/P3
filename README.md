@@ -3,7 +3,7 @@ PAV - P3: estimación de pitch
 
 
 Alumnes: Albert Caus i Nacho Blasi
--------------------------
+----------------------------------
 
 
 Esta práctica se distribuye a través del repositorio GitHub [Práctica 3](https://github.com/albino-pav/P3).
