@@ -1,0 +1,19 @@
+Apunts 02/05/25
+
+La finestra que funciona millor per l'estimació no és la de hamming, sinó  que és la rectangular
+
+Preprocesado: (Està explicat al apendix 2)
+	-Central Clipping (anar amb cuidado pq hi han 2 formes d'utilitzar-lo) S'ha de ficar el nivell del central clipping en funció del valor màxim de la senyal, ja que sinó, si tenim una senyal més dèbil ens la carregarem. (Retall a llarg plaç).
+	El retall a curt plaç és quan veiem la periodicitat de la senyal aquí tmb s'ha d'aplicar en referència al màxim.
+	
+	-Filtre pas baix no millora els resultats, però tmp els empitjora (es pot tallar a 4KHz), aleshores podem delmar la senyal original que està a 20KHz, retallant la senyal i per tant que vagi més ràpid. Per delmar la senyal s'ha de crear un script a part per aplicar el delmat a la senyal i s'ha de constriur aquest script, i després tmb s'ha de tenir en compte que si delmem la senyal els valors de la correlació seran molt diferents que la senyal original, per tant si hem calcular el valor de R(0)/R(1) amb la senyal de 20KHz i després delmem aquí, ja no servirà el valor calcular de R(0)/R(1).
+
+Postprocessat:
+	-Filtre de mitjanes: Amb longitud molt curta (Longitud imparell (Actual + 1 anterior + 1 següent), per tant 3 mostres) Si ho fem de la forma intuitiva i directa ho farem recursiu, però no volem que sigui recursiu. Si no aplica gaire millora no ficar el filtre pq fa que augmenti l'error, per això si la millora no és molt gran no cal ficar el filtre
+	-AMDF: Pot funcionar millor i més ràpid per calcular el candidat a pitch, però per res més. Podem utilitzar AMDF per calcular el pitch i després calculem l'autocorrelació per treballar després, i no cal que calculem tota l'autocorrelació, només caldrà la R(0), R(1) i R(n) per obtenir les mètriques R(0)/R(1) i R(0)/R(n) 
+
+Tmb podem normalitzar la senyal des d'un principi entre -1 i 1 pq hi han moltes coses que depenen d'això
+
+Per definir si és voiced o unvoiced tenim la funció bool PitchAnalyzer::unvoiced(float pot, float r1norm, float rmaxnorm) const que podem dir-li que depengui de 3 càlculs i que si 2 dels 3 funcionen i diuen que és unvoiced aleshores canviem.
+
+Tmb podem passar el vad (P2) abans d'aplicar la P3 per detectar quines zones són silenci i quines veu, però anar amb compte pq si diem que algo és veu i realment és silenci serà una merda estimar el pitch en aquella trama
