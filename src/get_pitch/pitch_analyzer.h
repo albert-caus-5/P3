@@ -30,9 +30,9 @@ namespace upc {
       samplingFreq, ///< sampling rate (in samples per second). Has to be set in the constructor call
       npitch_min, ///< minimum value of pitch period, in samples
       npitch_max; ///< maximum value of pitch period, in samples
-      float umbral_rlag;
-      float umbral_r1r0; 
-      float umbral_zcr;
+      float threshold_lag;
+      float threshold_r1r0; 
+      float threshold_zcr;
 	///
 	/// Computes correlation from lag=0 to r.size()
 	///
@@ -54,16 +54,16 @@ namespace upc {
 					Window w=PitchAnalyzer::RECT,	///< Window type
 					float min_F0 = MIN_F0,		///< Pitch range should be restricted to be above this value
 					float max_F0 = MAX_F0,		///< Pitch range should be restricted to be below this value
-				  float umbral_rlag_ = 0,   //Umbral per a autocorrelacio maxima normalitzada
-          float umbral_r1r0_ = 0,       //Umbral de relación entre indices 1 y 0.
-          float umbral_zcr_ = 0        //Umbral zcr.
+				  float threshold_lag1 = 0,   //Umbral per a autocorrelacio maxima normalitzada
+          float threshold_r1r01 = 0,       //Umbral de relación entre indices 1 y 0.
+          float threshold_zcr1 = 0        //Umbral zcr.
          )
 	{
       frameLen = fLen;
       samplingFreq = sFreq;
-      umbral_rlag = umbral_rlag_;
-      umbral_r1r0 = umbral_r1r0_;
-      umbral_zcr = umbral_zcr_;
+      threshold_lag = threshold_lag1;
+      threshold_r1r0 = threshold_r1r01;
+      threshold_zcr = threshold_zcr1;
       set_f0_range(min_F0, max_F0);
       set_window(w);
     }

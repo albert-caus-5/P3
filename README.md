@@ -25,10 +25,6 @@ Ejercicios básicos
       </p>
     
     El codi correspon a la següent formula:
-    ### Autocorrelació unilateral
-
-    L'autocorrelació d'una senyal discreta \( x[n] \) amb si mateixa, només per desplaçaments (lags) positius, es defineix com:
-
     $$
     r[l] = \frac{1}{N} \sum_{n=0}^{N - 1 - l} x[n] \cdot x[n + l] \quad \text{per a } l = 0, 1, \ldots, L
     $$
@@ -50,7 +46,15 @@ Ejercicios básicos
    * Determine el mejor candidato para el periodo de pitch localizando el primer máximo secundario de la
      autocorrelación. Inserte a continuación el código correspondiente.
 
+      <p align="center">
+        <img src="Foto4.png" width="80%" style="margin-right: 10px;" />
+      </p>
+
    * Implemente la regla de decisión sonoro o sordo e inserte el código correspondiente.
+
+      <p align="center">
+        <img src="Foto5.png" width="80%" style="margin-right: 10px;" />
+      </p>
 
    * Puede serle útil seguir las instrucciones contenidas en el documento adjunto `código.pdf`.
 

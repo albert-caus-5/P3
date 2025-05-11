@@ -4,13 +4,13 @@
 # distinto de cero, o cero si todos devuelven cero.
 set -o pipefail
 
-umbral_rlag=${1:-0.40}
+threshold_lag=${1:-0.40}
 clipmult=${2:-0.0075}
-umbral_r1r0=${3:-0.55}
-umbral_zcr=${4:-30}
+threshold_r1r0=${3:-0.55}
+threshold_zcr=${4:-30}
 medfilt=${5:-1}
 # Put here the program (maybe with path)
-GETF0="get_pitch --umbral_rlag=$umbral_rlag --clipmult=$clipmult --umbral_r1r0=$umbral_r1r0 --umbral_zcr=$umbral_zcr --medfilt=$medfilt"
+GETF0="get_pitch --threshold_lag=$threshold_lag --clipmult=$clipmult --threshold_r1r0=$threshold_r1r0 --threshold_zcr=$threshold_zcr --medfilt=$medfilt"
 
 for fwav in pitch_db/train/*.wav; do
     ff0=${fwav/.wav/.f0}

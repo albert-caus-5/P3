@@ -65,24 +65,16 @@ namespace upc {
     /// \TODO Implement a rule to decide whether the sound is voiced or not.
     ///  * You can use the standard features (pot, r1norm, rmaxnorm),
     ///   or compute and use other ones.
-
+    /// \FET Codi per decidir si una trama es sonora
     
-    int sonoro = 0;                 //si se cumplen dos criterios la trama será sonora
-    if(rmaxnorm > umbral_rlag){
-      sonoro++;
-    }                                    //comparación r[lah]/r[0]
-    if(r1norm > umbral_r1r0){
-      sonoro++;
-    }                                    //comparación r1/r0
-    if(zcr < umbral_zcr){
-      sonoro++;
-    }                                   //comparación zcr
-  
-    if(sonoro >= 2){
-      return false;  
-    }else{
-      return true; 
-    }
+    int es_sonor = 0;
+    if(rmaxnorm > threshold_lag) es_sonor++;                                
+    if(r1norm > threshold_r1r0) es_sonor++;                                   
+    if(zcr < threshold_zcr) es_sonor++;
+
+    //A base de diferents proves hem cosiderat que si 2 de les 3 opcions indiquen que és una trama sonora ho considerem com a tal
+    if(es_sonor >= 2) return false; 
+    else return true;
   }
 
   float PitchAnalyzer::compute_pitch(vector<float>& x, float zcr) const {
@@ -101,7 +93,7 @@ namespace upc {
     std::vector<float>::iterator iR = r.begin(), iRMax = iR;
 
     /// \TODO 
-    /// \DONE
+    /// \FET
 	/// Find the lag of the maximum value of the autocorrelation away from the origin.<br>
 	/// Choices to set the minimum value of the lag are:
 	///    - The first negative value of the autocorrelation.

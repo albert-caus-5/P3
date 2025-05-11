@@ -27,9 +27,9 @@ Usage:
 Options:
     -m REAL, --medfilt=REAL  Longitud filtro de mediana. [default: 1]
     -c REAL, --clipmult=REAL  Valor clipping [default: 0.0075]
-    -r REAL, --umbral_rlag=REAL  Umbral autocrrelación normalizada.[default: 0.4]
-    -1 REAL, --umbral_r1r0=REAL  Umbral r[1]/r[0]. [default: 0.55]
-    -z REAL, --umbral_zcr=REAL  Umbral ZCR. [default: 30]
+    -r REAL, --threshold_lag=REAL  Umbral autocrrelación normalizada.[default: 0.4]
+    -1 REAL, --threshold_r1r0=REAL  Umbral r[1]/r[0]. [default: 0.55]
+    -z REAL, --threshold_zcr=REAL  Umbral ZCR. [default: 30]
 
     -h, --help  Show this screen
     --version   Show the version of the project
@@ -57,10 +57,10 @@ int main(int argc, const char *argv[]) {
  
 	std::string input_wav = args["<input-wav>"].asString();
 	std::string output_txt = args["<output-txt>"].asString();
-  float umbral_rlag = stof(args["--umbral_rlag"].asString());
+  float threshold_lag = stof(args["--threshold_lag"].asString());
   float clipmult = stof(args["--clipmult"].asString());
-  float umbral_r1r0 = stof(args["--umbral_r1r0"].asString());
-  float umbral_zcr = stof(args["--umbral_zcr"].asString());
+  float threshold_r1r0 = stof(args["--threshold_r1r0"].asString());
+  float threshold_zcr = stof(args["--threshold_zcr"].asString());
   float medfilt = stof(args["--medfilt"].asString());
 
   // Read input sound file
@@ -75,7 +75,7 @@ int main(int argc, const char *argv[]) {
   int n_shift = rate * FRAME_SHIFT;
 
   // Define analyzer
-  PitchAnalyzer analyzer(n_len, rate, PitchAnalyzer::RECT, 50, 500, umbral_rlag,umbral_r1r0, umbral_zcr);
+  PitchAnalyzer analyzer(n_len, rate, PitchAnalyzer::RECT, 50, 500, threshold_lag, threshold_r1r0, threshold_zcr);
 
   /// \TODO
   /// \DONE
