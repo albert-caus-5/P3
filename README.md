@@ -21,12 +21,19 @@ Ejercicios básicos
    * Complete el cálculo de la autocorrelación e inserte a continuación el código correspondiente.
 
     	<p align="center">
-        <img src="Foto1.png" width="60%" style="margin-right: 10px;" />
+        <img src="Foto1.png" width="80%" style="margin-right: 10px;" />
       </p>
 
    * Inserte una gŕafica donde, en un *subplot*, se vea con claridad la señal temporal de un segmento de
      unos 30 ms de un fonema sonoro y su periodo de pitch; y, en otro *subplot*, se vea con claridad la
 	 autocorrelación de la señal y la posición del primer máximo secundario.
+
+      <p align="center">
+        <img src="Foto2.png" width="80%" style="margin-right: 10px;" />
+      </p>
+      <p align="center">
+        <img src="Foto3.png" width="80%" style="margin-right: 10px;" />
+      </p>
 
 	 NOTA: es más que probable que tenga que usar Python, Octave/MATLAB u otro programa semejante para
 	 hacerlo. Se valorará la utilización de la biblioteca matplotlib de Python.
