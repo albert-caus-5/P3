@@ -24,10 +24,10 @@ Ejercicios básicos
         <img src="Foto1.png" width="80%" style="margin-right: 10px;" />
       </p>
     
-    El codi correspon a la següent formula:
-    $$
-    r[l] = \frac{1}{N} \sum_{n=0}^{N - 1 - l} x[n] \cdot x[n + l] \quad \text{per a } l = 0, 1, \ldots, L
-    $$
+      El codi correspon a la següent formula:
+      $$
+      r[l] = \frac{1}{N} \sum_{n=0}^{N - 1 - l} x[n] \cdot x[n + l] \quad \text{per a } l = 0, 1, \ldots, L
+      $$
 
    * Inserte una gŕafica donde, en un *subplot*, se vea con claridad la señal temporal de un segmento de
      unos 30 ms de un fonema sonoro y su periodo de pitch; y, en otro *subplot*, se vea con claridad la
@@ -130,11 +130,11 @@ Ejercicios de ampliación
         <tr>
           <td align="center">
             <img src="Foto9.png" width="400"><br>
-            <sub>Figura 1: Métode preprocessat</sub>
+            <sub>Figura 1: Métode preprocessat: Center Clipping</sub>
           </td>
           <td align="center">
             <img src="Foto10.png" width="400"><br>
-            <sub>Figura 2: Métode postprocessat</sub>
+            <sub>Figura 2: Métode postprocessat: Filter de mitjanes</sub>
           </td>
         </tr>
       </table>
