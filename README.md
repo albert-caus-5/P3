@@ -25,7 +25,7 @@ Ejercicios básicos
       </p>
     
       
-      # Autocorrelació unilateral
+      ##### Autocorrelació unilateral
 
       El codi correspon a la següent formula:
 
