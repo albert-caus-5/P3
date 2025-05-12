@@ -83,7 +83,7 @@ Ejercicios básicos
 		ilustrativa del resultado de ambos estimadores.
      
       <p align="center">
-        <img src="Foto6.png" width="80%" style="margin-right: 10px;" />
+        <img src="Foto7.png" width="80%" style="margin-right: 10px;" />
       </p>
 
 
