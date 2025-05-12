@@ -4,7 +4,7 @@
 # distinto de cero, o cero si todos devuelven cero.
 set -o pipefail
 
-threshold_lag=${1:-0.40}
+threshold_lag=${1:-0.39}
 clipmult=${2:-0.0075}
 threshold_r1r0=${3:-0.55}
 threshold_zcr=${4:-30}
