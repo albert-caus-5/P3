@@ -129,12 +129,12 @@ Ejercicios de ampliación
       <table>
         <tr>
           <td align="center">
-            <img src="Foto9.png" width="150"><br>
-            <sub>Figura 1: Etiquetado automatico</sub>
+            <img src="Foto9.png" width="400"><br>
+            <sub>Figura 1: Métode preprocessat</sub>
           </td>
           <td align="center">
-            <img src="Foto10.png" width="200"><br>
-            <sub>Figura 2: Etiquetado de nuestro codigo</sub>
+            <img src="Foto10.png" width="400"><br>
+            <sub>Figura 2: Métode postprocessat</sub>
           </td>
         </tr>
       </table>
