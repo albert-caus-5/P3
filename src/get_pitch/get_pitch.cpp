@@ -25,11 +25,11 @@ Usage:
     get_pitch --version
 
 Options:
-    -m REAL, --medfilt=REAL  Longitud filtro de mediana. [default: 1]
-    -c REAL, --clipmult=REAL  Valor clipping [default: 0.0075]
-    -r REAL, --threshold_lag=REAL  Umbral autocrrelación normalizada.[default: 0.4]
-    -1 REAL, --threshold_r1r0=REAL  Umbral r[1]/r[0]. [default: 0.55]
-    -z REAL, --threshold_zcr=REAL  Umbral ZCR. [default: 30]
+    -a REAL, --threshold_lag=REAL  Umbral de l'autocorrelación normalizada.[default: 0.39]
+    -c REAL, --center_clipping=REAL  Valor del center clipping com a preprocessat. [default: 0.0075]
+    -r REAL, --threshold_r1r0=REAL  Umbral de l'autocorrelació d'1 r[1]/r[0]. [default: 0.55]
+    -z REAL, --threshold_zcr=REAL  Umbral del ZCR. [default: 30]
+    -m REAL, --median_filter=REAL  Longitud del filtre de mitjanes com a postprocessat. [default: 1]
 
     -h, --help  Show this screen
     --version   Show the version of the project
@@ -47,7 +47,7 @@ float abs_f(float value){
 }
 int main(int argc, const char *argv[]) {
 	/// \TODO 
-  /// \DONE
+  /// \FET Crida a Docopt per facilitar l'execució
 	///  Modify the program syntax and the call to **docopt()** in order to
 	///  add options and arguments to the program.
     std::map<std::string, docopt::value> args = docopt::docopt(USAGE,
@@ -58,10 +58,10 @@ int main(int argc, const char *argv[]) {
 	std::string input_wav = args["<input-wav>"].asString();
 	std::string output_txt = args["<output-txt>"].asString();
   float threshold_lag = stof(args["--threshold_lag"].asString());
-  float clipmult = stof(args["--clipmult"].asString());
+  float center_clipping = stof(args["--center_clipping"].asString());
   float threshold_r1r0 = stof(args["--threshold_r1r0"].asString());
   float threshold_zcr = stof(args["--threshold_zcr"].asString());
-  float medfilt = stof(args["--medfilt"].asString());
+  float median_filter = stof(args["--median_filter"].asString());
 
   // Read input sound file
   unsigned int rate;
@@ -78,65 +78,64 @@ int main(int argc, const char *argv[]) {
   PitchAnalyzer analyzer(n_len, rate, PitchAnalyzer::RECT, 50, 500, threshold_lag, threshold_r1r0, threshold_zcr);
 
   /// \TODO
-  /// \DONE
-  /// Preprocess the input signal in order to ease pitch estimation. For instance, central-clipping or low pass filtering may be used.
+  /// \FET Métode de preprocessat Center-Clipping
+  /// Preprocess the input signal in order to ease pitch estimation. For instance, 
+  /// central-clipping or low pass filtering may be used.
 
   std::vector<float>::iterator iX, it;
-
-  // CLIPPING
-  // Iterate for each frame and save values in f0 vector
-  // Get Max value in magnitude, either positive or negative 
-  float Cl = -1.0;
-  for(iX = x.begin(); iX < x.end(); ++iX){    
-    Cl = std::max(Cl, abs_f(*iX));
-  }
-  Cl = clipmult * Cl;
-
   vector<float> f0;
-  float f, aux, prev, act, zcr=0; 
+  // Iterate for each frame and save values in f0 vector
+
+  // Agafem el valor màxim, tant si és positiu com negatiu
+  float cent_clip = -1.0;
+  for(iX = x.begin(); iX < x.end(); ++iX){    
+    cent_clip = std::max(cent_clip, abs_f(*iX));
+  }
+  cent_clip = center_clipping * cent_clip;
+
+
+  float f, aux_1, aux_2, aux_3, zcr=0; 
   float cte = rate / (2 * (n_len - 1));
   for (iX = x.begin(); iX + n_len < x.end(); iX = iX + n_shift) {
-    //Implement code to pass its original ZCR value.
-    prev=0; aux=0;
-    for(it = iX; it < iX + n_len; ++it){  //COMPUTE ZCR and Clipping:
-      act = *it;
-      if((act * prev) < 0){ aux++;}
-      prev = act;
+    aux_2=0; aux_1=0;
+    //Combinació amb el ZCR
+    for(it = iX; it < iX + n_len; ++it){ 
+      aux_3 = *it;
+      if((aux_3 * aux_2) < 0){ aux_1++;}
+      aux_2 = aux_3;
 
-      if(abs(act) < Cl){ *it = 0;}
-      else *it = *it + Cl * ((act < 0) - (act > 0));
+      if(abs(aux_3) < cent_clip){ *it = 0;}
+      else *it = *it + cent_clip * ((aux_3 < 0) - (aux_3 > 0));
     }
-    
-    zcr = aux * cte;
-    //cout << zcr <<"\t"<< aux <<"\t"<< rate <<"\t"<< n_len <<"\t"<< endl;
+    zcr = aux_1 * cte;
+
     f = analyzer(iX, iX + n_len, zcr);
     f0.push_back(f);
   }
 
-  // JUST ODD NUMBERS  
-  int F_size = medfilt;  
-  vector<float> filter; 
+
   
   /// \TODO
-  /// \DONE
+  /// \FET Métode de postprocessat media filter
   /// Postprocess the estimation in order to supress errors. For instance, a median filter
+  int size = median_filter;  
+  vector<float> filter; 
 
-  for(iX = f0.begin(); iX < f0.end() - (F_size - 1); ++iX){    
-    for(int i = 0; i<F_size; i++)      
-      filter.push_back(*(iX+i));
-    int k, l;
-
-    for(k = 0; k < F_size-1; k++){      // Sort:
-      for(l = 0; l < F_size-k-1; l++){
-        if (filter[l] > filter[l+1]){        
-          aux = filter[l];        
-          filter[l] = filter[l+1]; 
-          filter[l+1] = aux;      
-        }    
-      }   
+  for(iX = f0.begin(); iX < f0.end() - (size - 1); ++iX){    
+    for(int i = 0; i<size; i++)      
+      filter.push_back(*(iX+i)); 
+    
+    int i, j;
+    for(i = 0; i < size-1; i++){ 
+      for(j = 0; j < size-i-1; j++){
+        if (filter[j] > filter[j+1]){        
+          aux_1 = filter[j];        
+          filter[j] = filter[j+1]; 
+          filter[j+1] = aux_1;      
+        }
+      }
     }
-    // Get median    
-    f0[iX - f0.begin()] = filter[F_size/2];
+    f0[iX - f0.begin()] = filter[size/2];
     filter.clear();  
   } 
 

@@ -107,6 +107,11 @@ Ejercicios de ampliación
   * Inserte un *pantallazo* en el que se vea el mensaje de ayuda del programa y un ejemplo de utilización
     con los argumentos añadidos.
 
+      <p align="center">
+        <img src="Foto8.png" width="80%" style="margin-right: 10px;" />
+      </p>
+
+
 - Implemente las técnicas que considere oportunas para optimizar las prestaciones del sistema de estimación
   de pitch.
 
@@ -119,6 +124,21 @@ Ejercicios de ampliación
   * Optimización **demostrable** de los parámetros que gobiernan el estimador, en concreto, de los que
     gobiernan la decisión sonoro/sordo.
   * Cualquier otra técnica que se le pueda ocurrir o encuentre en la literatura.
+
+      <div align="center">
+      <table>
+        <tr>
+          <td align="center">
+            <img src="Foto9.png" width="150"><br>
+            <sub>Figura 1: Etiquetado automatico</sub>
+          </td>
+          <td align="center">
+            <img src="Foto10.png" width="200"><br>
+            <sub>Figura 2: Etiquetado de nuestro codigo</sub>
+          </td>
+        </tr>
+      </table>
+      </div> 
 
   Encontrará más información acerca de estas técnicas en las [Transparencias del Curso](https://atenea.upc.edu/pluginfile.php/2908770/mod_resource/content/3/2b_PS%20Techniques.pdf)
   y en [Spoken Language Processing](https://discovery.upc.edu/iii/encore/record/C__Rb1233593?lang=cat).

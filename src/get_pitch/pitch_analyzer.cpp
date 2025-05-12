@@ -34,7 +34,7 @@ namespace upc {
     switch (win_type) {
     case HAMMING:
       /// \TODO Implement the Hamming window
-      /// \DONE Formula aplicada
+      /// \FET Finestra de Hamming
       for(unsigned int i=0; i<frameLen; i++){
         window[i] = 0.54 - 0.46*cos((2*M_PI*i)/(frameLen-1));
       }
