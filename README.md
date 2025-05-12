@@ -24,10 +24,10 @@ Ejercicios básicos
         <img src="Foto1.png" width="80%" style="margin-right: 10px;" />
       </p>
     
-      El codi correspon a la següent formula:
-      ### Autocorrelació unilateral
+      
+      # Autocorrelació unilateral
 
-      L'autocorrelació d'una senyal discreta \( x[n] \) amb si mateixa, només per desplaçaments (lags) positius, es defineix com:
+      El codi correspon a la següent formula:
 
       $$
       r[l] = \frac{1}{N} \sum_{n=0}^{N - 1 - l} x[n] \cdot x[n + l] \quad \text{per a } l = 0, 1, \ldots, L
